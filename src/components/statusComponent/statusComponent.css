@@ -1,0 +1,6 @@
+.status-container {
+  display: flex;
+  padding: 5px;
+  align-items: baseline;
+  margin-left: auto;
+}

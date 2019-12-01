@@ -3,31 +3,41 @@ import AddButton from "../addBtnComponent/addButton";
 import ItemsComponent from "../itemsComponent/itemsComponent";
 
 class MainComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      items: [
-        { id: 1, description: "Description1", status: false },
-        { id: 2, description: "Description2", status: false },
-        { id: 3, description: "Description3", status: true },
-        { id: 4, description: "Description4", status: false },
-        { id: 5, description: "Description5", status: false }
-      ]
-    };
-  }
-
-  handleDeleteItem = itemId => {
-    console.log(itemId);
-    const items = this.state.items.filter(i => i.id !== itemId);
-    this.setState({ items });
-  };
   render() {
     return (
       <div className="main-container">
-        <AddButton></AddButton>
+        <AddButton onAddItem={this.props.onAddItem} />
+        {this.props.showForm ? (
+          <div className="item-container">
+            <form onSubmit={this.props.onSubmit}>
+              <div className="form-group form-inline">
+                <label>Add description: </label>
+                <input
+                  type="text"
+                  defaultValue=""
+                  onChange={this.props.onDescriptionChange}
+                  className="form-control"
+                />
+
+                <input
+                  type="submit"
+                  value="Add ToDo"
+                  className="btn btn-outline-success btn-sm"
+                />
+              </div>
+            </form>
+          </div>
+        ) : (
+          " "
+        )}
         <ItemsComponent
-          items={this.state.items}
-          onDeleteItem={this.handleDeleteItem}
+          items={this.props.items}
+          onDeleteItem={this.props.onDeleteItem}
+          onCheckboxStatusChanged={this.props.onCheckboxStatusChanged}
+          onEditItem={this.props.onEditItem}
+          inEditing={this.props.inEditing}
+          editedItemId={this.props.editedItemId}
+          onTextChanged={this.props.onTextChanged}
         ></ItemsComponent>
       </div>
     );

@@ -20,7 +20,7 @@ class App extends Component {
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
-    this.url = "http://localhost:8080/todo/";
+    this.url = "https://nestjs-be-mixin-2019.eu-gb.mybluemix.net/todo/";
   }
 
   getAllItems = () => {
